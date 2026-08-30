@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Inter:wght@400;500;600&display=swap');
+
+/* Tipografia Base */
+h1, h2, h3, .pm-logo { font-family: 'Playfair Display', Georgia, serif; }
+h1 { font-size: 1.7rem !important; margin: 0 0 0.75rem !important; }
+[data-testid="stAppViewContainer"] { font-family: 'Inter', sans-serif; }
+
+/* Estrutura Principal */
+[data-testid="stAppViewContainer"] {
+    background-color: #FAF6EE;
+    color: #4A4A45;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #F3EDE2;
+    border-right: 1px solid #E7DFD2;
+}
+
+[data-testid="stHeader"] {
+    background-color: transparent;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] { 
+    border-radius: 14px; 
+}
+
+/* Cores de Texto */
+h1, h2, h3, .pm-logo {
+    color: #1E5C4F !important;
+}
+
+p, span, div {
+    color: #4A4A45;
+}
+
+/* Grid e Cartões de Cores */
+.pm-palette-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin: 0.5rem 0; 
+}
+
+.pm-swatch-card { 
+    width: 128px; 
+    border-radius: 14px; 
+    padding: 10px; 
+    font-size: 0.78rem;
+    background-color: #FFFFFF;
+    border: 1px solid #E7DFD2;
+    box-shadow: 0 4px 14px rgba(90, 70, 40, 0.08);
+    color: #4A4A45;
+}
+
+.pm-swatch-color { 
+    height: 56px; 
+    border-radius: 10px; 
+    margin-bottom: 6px; 
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.pm-placeholder { 
+    font-family: 'Playfair Display', serif; 
+    font-style: italic; 
+    opacity: 0.7; 
+    padding: 2rem 1rem; 
+    text-align: center;
+    color: #7A7263;
+}
+
+/* Alertas */
+[data-testid="stAlert"] {
+    background-color: #EFE7D8 !important;
+    color: #5C5344 !important;
+    border: 1px solid #E7DFD2 !important;
+}
+
+/* Botões Ghost Globais */
+.stButton > button {
+    background-color: transparent;
+    color: #4A4A45;
+    border: none;
+    box-shadow: none;
+    transition: background-color 0.2s;
+}
+
+.stButton > button span {
+    font-size: 1.6rem !important;
+}
+
+.stButton > button:hover {
+    background-color: rgba(180, 89, 63, 0.12);
+}
+
+.stButton > button:disabled {
+    opacity: 0.4;
+    background-color: transparent;
+}
+
+/* Escopo Sidebar */
+[data-testid="stSidebar"] .stButton > button {
+    font-size: 0.95rem;
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+    border-radius: 8px;
+    padding: 0.45rem 0.6rem;
+}
+
+[data-testid="stSidebar"] .stButton > button span {
+    font-size: 0.95rem !important;
+}
+
+[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: rgba(180, 89, 63, 0.12);
+}

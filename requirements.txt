@@ -1,0 +1,5 @@
+streamlit
+pillow
+numpy
+streamlit-image-coordinates
+streamlit-js-eval
