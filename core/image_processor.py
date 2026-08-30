@@ -7,10 +7,11 @@ def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
     return f"#{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X}"
 
 def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
-    """Extrai cores via binning com resgate de cores vivas e claras."""
+    """Extrai cores via binning com resgate preciso de cores vivas e claras."""
     img_rgb = image.convert("RGB")
     img_rgb.thumbnail((200, 200))
     arr = np.array(img_rgb).reshape(-1, 3).astype(int)
+    total_pixels = len(arr)
     
     binned = (arr // 32) * 32 + 16
     unique_colors, counts = np.unique(binned, axis=0, return_counts=True)
@@ -32,7 +33,7 @@ def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
     sat = (maxc - minc) / np.maximum(maxc, 1)
     
     mask_vivid = (sat > 0.45) & (maxc > 60)
-    if mask_vivid.sum() > 20:
+    if mask_vivid.sum() > 50:
         vivid_arr = arr[mask_vivid]
         vivid_binned = (vivid_arr // 32) * 32 + 16
         v_unique, v_counts = np.unique(vivid_binned, axis=0, return_counts=True)
@@ -52,7 +53,7 @@ def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
                 added += 1
                 
     mask_light = (sat < 0.30) & (maxc > 200)
-    if mask_light.sum() > 20:
+    if mask_light.sum() > 100:
         light_arr = arr[mask_light]
         light_binned = (light_arr // 32) * 32 + 16
         l_unique, l_counts = np.unique(light_binned, axis=0, return_counts=True)
@@ -64,6 +65,9 @@ def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
         for i in range(len(l_unique)):
             if added >= 1 or len(chosen) >= max_colors:
                 break
+            percent_candidate = (l_counts[i] / total_pixels) * 100
+            if percent_candidate < 1.5:
+                continue
             candidate = tuple(l_unique[i])
             is_dup = any(math.sqrt(sum((a - b)**2 for a, b in zip(candidate, c))) < 60 for c in chosen)
             if not is_dup:
@@ -71,7 +75,6 @@ def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
                 chosen_counts.append(l_counts[i])
                 added += 1
                 
-    total_pixels = len(arr)
     results = []
     for i in range(len(chosen)):
         r, g, b = int(chosen[i][0]), int(chosen[i][1]), int(chosen[i][2])

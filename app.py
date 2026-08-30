@@ -12,7 +12,7 @@ from ui.palette_finder import render_palette_finder
 st.set_page_config(page_title="Palette Master", page_icon="🎨", layout="wide")
 
 def main() -> None:
-    """Ponto de entrada do Palette Master com ajustes visuais compactos de layout."""
+    """Ponto de entrada do Palette Master com buscador interativo no catálogo e grupos."""
     theme = render_theme_switcher()
     inject_theme(theme)
     
@@ -50,9 +50,17 @@ def main() -> None:
             nome = plugin_data.get("niche_name", "")
             version = plugin_data.get("version", "1.0")
             with st.expander(f"🎨 Catálogo ativo: {nome} (v{version})", expanded=False):
+                busca = st.text_input("🔎 Buscar por nome ou código", key="pm_busca_cor")
+                
+                cores_lista = plugin_data.get("colors", [])
+                if busca:
+                    busca_lower = busca.lower()
+                    cores_lista = [c for c in cores_lista if busca_lower in c.get("name", "").lower() or busca_lower in c.get("code", "").lower()]
+                    st.caption(f"{len(cores_lista)} cor(es) encontrada(s)")
+                    
                 with st.container(height=320):
                     html_cards = []
-                    for color in plugin_data.get("colors", []):
+                    for color in cores_lista:
                         r, g, b = color["rgb"]
                         card = f'<div class="pm-swatch-card"><div class="pm-swatch-color" style="background: rgb({r}, {g}, {b});"></div><strong>{color["code"]}</strong><br>{color["name"]}</div>'
                         html_cards.append(card)
