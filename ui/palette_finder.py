@@ -31,7 +31,7 @@ def classify(rgb: tuple[int, int, int]) -> str:
     return "Neutros"
 
 def render_palette_finder(plugin: dict | None) -> None:
-    """Renderiza a interface do buscador de paletas por tom no catálogo ativo."""
+    """Renderiza a interface do buscador de paletas por tom com grade e sugestões."""
     with st.expander("🔍 Paletas por tom (catálogo ativo)", expanded=False):
         if plugin is None:
             st.caption("Sem catálogo ativo.")
@@ -50,6 +50,18 @@ def render_palette_finder(plugin: dict | None) -> None:
             st.warning("O catálogo ativo não tem cores nesses tons.")
             return
             
+        st.caption(f"{len(filtered)} cor(es) nesses tons no catálogo")
+        
+        with st.container(height=320):
+            html_cards_filtered = []
+            for c in filtered:
+                r, g, b = c["rgb"]
+                card = f'<div class="pm-swatch-card"><div class="pm-swatch-color" style="background: rgb({r}, {g}, {b});"></div><strong>{c["code"]}</strong><br>{c["name"]}</div>'
+                html_cards_filtered.append(card)
+            st.markdown(f'<div class="pm-palette-grid">{"".join(html_cards_filtered)}</div>', unsafe_allow_html=True)
+            
+        st.caption("Combos sugeridos")
+        
         neutros = [c for c in plugin_colors if classify(c["rgb"]) == "Neutros"]
         neutros_claros = [c for c in neutros if colorsys.rgb_to_hsv(c["rgb"][0]/255, c["rgb"][1]/255, c["rgb"][2]/255)[2] >= 0.8]
         

@@ -12,7 +12,7 @@ from ui.palette_finder import render_palette_finder
 st.set_page_config(page_title="Palette Master", page_icon="🎨", layout="wide")
 
 def main() -> None:
-    """Ponto de entrada do Palette Master com buscador interativo no catálogo e grupos."""
+    """Ponto de entrada principal com suporte a alias de busca, extração e grupos."""
     theme = render_theme_switcher()
     inject_theme(theme)
     
@@ -54,8 +54,11 @@ def main() -> None:
                 
                 cores_lista = plugin_data.get("colors", [])
                 if busca:
-                    busca_lower = busca.lower()
-                    cores_lista = [c for c in cores_lista if busca_lower in c.get("name", "").lower() or busca_lower in c.get("code", "").lower()]
+                    ALIASES = {"ciano": "turquoise", "cyan": "turquoise", "vermelho": "red", "rosa": "rose", "roxo": "violet", "lilas": "lavender", "azul": "blue", "verde": "green", "amarelo": "yellow", "laranja": "orange", "marrom": "brown", "bege": "beige", "cinza": "grey", "branco": "white", "preto": "black", "dourado": "gold"}
+                    termo = busca.lower()
+                    termos = [termo] + ([ALIASES[termo]] if termo in ALIASES else [])
+                    
+                    cores_lista = [c for c in cores_lista if any(t in c.get("name", "").lower() or t in c.get("code", "").lower() for t in termos)]
                     st.caption(f"{len(cores_lista)} cor(es) encontrada(s)")
                     
                 with st.container(height=320):

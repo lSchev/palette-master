@@ -13,19 +13,36 @@ def save_groups(groups: dict) -> None:
     """Atualiza o estado dos grupos na sessão antes da persistência local."""
     st.session_state["pm_groups_cache"] = groups
 
+@st.dialog("📁 Novo grupo")
+def new_group_dialog():
+    """Modal suspenso para criação de um novo grupo de paletas."""
+    new_name = st.text_input("Nome do grupo", key="pm_dialog_new_name", placeholder="Ex: Toalha da vovó")
+    c1, c2 = st.columns([1, 1])
+    
+    if c1.button("✅ Criar", type="primary", key="dlg_criar"):
+        if new_name.strip():
+            groups = get_groups()
+            groups[new_name.strip()] = []
+            save_groups(groups)
+            st.success(f"Grupo '{new_name.strip()}' criado!")
+            st.session_state["pm_show_new_group"] = False
+            st.rerun()
+            
+    if c2.button("❌ Cancelar", key="dlg_cancelar"):
+        st.session_state["pm_show_new_group"] = False
+        st.rerun()
+
 def render_groups_sidebar(results: list[dict] | None) -> None:
-    """Renderiza a seção de grupos na barra lateral e sincroniza persistência."""
+    """Renderiza a seção de grupos na barra lateral com modal e sincronização persistente."""
     st.sidebar.divider()
     st.sidebar.caption("💾 MEUS GRUPOS")
     groups = get_groups()
     
-    with st.sidebar.expander("+ Novo grupo", expanded=False):
-        new_name = st.text_input("Nome do grupo", key="pm_new_group_name", placeholder="Ex: Toalha da vovó")
-        if st.button("Criar grupo") and new_name.strip():
-            groups[new_name.strip()] = []
-            save_groups(groups)
-            st.success(f"Grupo '{new_name.strip()}' criado!")
-            st.rerun()
+    if st.sidebar.button("➕ Novo grupo", key="btn_novo_grupo"):
+        st.session_state["pm_show_new_group"] = True
+        
+    if st.session_state.get("pm_show_new_group"):
+        new_group_dialog()
     
     if not groups:
         st.sidebar.caption("Nenhum grupo ainda. Crie o primeiro acima.")
