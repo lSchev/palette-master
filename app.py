@@ -12,9 +12,11 @@ from ui.palette_finder import render_palette_finder
 st.set_page_config(page_title="Palette Master", page_icon="🎨", layout="wide")
 
 def main() -> None:
-    """Ponto de entrada do Palette Master, integrando extração, busca por tons e grupos."""
+    """Ponto de entrada do Palette Master com ajustes visuais compactos de layout."""
     theme = render_theme_switcher()
     inject_theme(theme)
+    
+    st.markdown('<style>header[data-testid="stHeader"]{height:0 !important;} div.block-container{padding-top:1.5rem !important;} section[data-testid="stSidebar"]>div{padding-top:1rem !important;} h1{margin-bottom:0.5rem !important;}</style>', unsafe_allow_html=True)
     
     pm = PluginManager()
     pm.load_plugins()
@@ -48,14 +50,15 @@ def main() -> None:
             nome = plugin_data.get("niche_name", "")
             version = plugin_data.get("version", "1.0")
             with st.expander(f"🎨 Catálogo ativo: {nome} (v{version})", expanded=False):
-                html_cards = []
-                for color in plugin_data.get("colors", [])[:10]:
-                    r, g, b = color["rgb"]
-                    card = f'<div class="pm-swatch-card"><div class="pm-swatch-color" style="background: rgb({r}, {g}, {b});"></div><strong>{color["code"]}</strong><br>{color["name"]}</div>'
-                    html_cards.append(card)
-                grid_html = f'<div class="pm-palette-grid">{"".join(html_cards)}</div>'
-                st.markdown(grid_html, unsafe_allow_html=True)
-                
+                with st.container(height=320):
+                    html_cards = []
+                    for color in plugin_data.get("colors", []):
+                        r, g, b = color["rgb"]
+                        card = f'<div class="pm-swatch-card"><div class="pm-swatch-color" style="background: rgb({r}, {g}, {b});"></div><strong>{color["code"]}</strong><br>{color["name"]}</div>'
+                        html_cards.append(card)
+                    grid_html = f'<div class="pm-palette-grid">{"".join(html_cards)}</div>'
+                    st.markdown(grid_html, unsafe_allow_html=True)
+                    
         render_palette_finder(plugin_data)
                 
     render_groups_sidebar(results)

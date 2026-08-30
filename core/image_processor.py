@@ -6,8 +6,8 @@ def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
     """Converte uma tupla de valores RGB para uma string HEX maiúscula."""
     return f"#{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X}"
 
-def extract_palette(image: Image.Image, max_colors: int = 8) -> list[dict]:
-    """Extrai cores via binning matemático com resgate de cores vivas."""
+def extract_palette(image: Image.Image, max_colors: int = 10) -> list[dict]:
+    """Extrai cores via binning com resgate de cores vivas e claras."""
     img_rgb = image.convert("RGB")
     img_rgb.thumbnail((200, 200))
     arr = np.array(img_rgb).reshape(-1, 3).astype(int)
@@ -22,7 +22,7 @@ def extract_palette(image: Image.Image, max_colors: int = 8) -> list[dict]:
     chosen = []
     chosen_counts = []
     
-    num_coverage = min(len(unique_colors), max_colors - 2)
+    num_coverage = min(len(unique_colors), max_colors - 3)
     for i in range(num_coverage):
         chosen.append(tuple(unique_colors[i]))
         chosen_counts.append(counts[i])
@@ -30,10 +30,10 @@ def extract_palette(image: Image.Image, max_colors: int = 8) -> list[dict]:
     maxc = arr.max(axis=1)
     minc = arr.min(axis=1)
     sat = (maxc - minc) / np.maximum(maxc, 1)
-    mask = (sat > 0.45) & (maxc > 60)
     
-    if mask.sum() > 20:
-        vivid_arr = arr[mask]
+    mask_vivid = (sat > 0.45) & (maxc > 60)
+    if mask_vivid.sum() > 20:
+        vivid_arr = arr[mask_vivid]
         vivid_binned = (vivid_arr // 32) * 32 + 16
         v_unique, v_counts = np.unique(vivid_binned, axis=0, return_counts=True)
         v_sorted_idx = np.argsort(-v_counts)
@@ -49,6 +49,26 @@ def extract_palette(image: Image.Image, max_colors: int = 8) -> list[dict]:
             if not is_dup:
                 chosen.append(candidate)
                 chosen_counts.append(v_counts[i])
+                added += 1
+                
+    mask_light = (sat < 0.30) & (maxc > 200)
+    if mask_light.sum() > 20:
+        light_arr = arr[mask_light]
+        light_binned = (light_arr // 32) * 32 + 16
+        l_unique, l_counts = np.unique(light_binned, axis=0, return_counts=True)
+        l_sorted_idx = np.argsort(-l_counts)
+        l_unique = l_unique[l_sorted_idx]
+        l_counts = l_counts[l_sorted_idx]
+        
+        added = 0
+        for i in range(len(l_unique)):
+            if added >= 1 or len(chosen) >= max_colors:
+                break
+            candidate = tuple(l_unique[i])
+            is_dup = any(math.sqrt(sum((a - b)**2 for a, b in zip(candidate, c))) < 60 for c in chosen)
+            if not is_dup:
+                chosen.append(candidate)
+                chosen_counts.append(l_counts[i])
                 added += 1
                 
     total_pixels = len(arr)

@@ -14,7 +14,7 @@ def render_theme_switcher() -> str:
                 want_output=True, 
                 key="pm_dark_detect"
             )
-            st.session_state["theme"] = "Escuro" if dark in (True, None) else "Claro"
+            st.session_state["theme"] = "Escuro" if dark in (True, "true", None) else "Claro"
             
     col1, col2, col3, col4 = st.columns([50, 1, 1, 1], gap="small")
     
@@ -35,14 +35,15 @@ def render_theme_switcher() -> str:
 
 def render_sidebar(plugins: list[dict], load_errors: list[str]) -> dict:
     """Renderiza a barra lateral principal, plugins e carrega cache de grupos persistido."""
-    if "pm_groups_cache" not in st.session_state:
-        saved_groups = get_local_storage("pm_groups")
-        if saved_groups:
+    if not st.session_state.get("pm_groups_from_storage"):
+        saved_groups = get_local_storage("pm_groups", component_key="pm_load_groups_init")
+        if saved_groups is not None:
             try:
                 st.session_state["pm_groups_cache"] = json.loads(saved_groups)
-            except:
+            except Exception:
                 st.session_state["pm_groups_cache"] = {}
-        else:
+            st.session_state["pm_groups_from_storage"] = True
+        elif "pm_groups_cache" not in st.session_state:
             st.session_state["pm_groups_cache"] = {}
 
     st.sidebar.markdown('<div class="pm-logo">🎨 Palette Master</div>', unsafe_allow_html=True)
