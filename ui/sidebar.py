@@ -1,3 +1,4 @@
+# ui/sidebar.py
 import json
 import streamlit as st
 from streamlit_js_eval import streamlit_js_eval, get_local_storage, set_local_storage
@@ -46,7 +47,7 @@ def render_sidebar(plugins: list[dict], load_errors: list[str]) -> dict:
         elif "pm_groups_cache" not in st.session_state:
             st.session_state["pm_groups_cache"] = {}
 
-    st.sidebar.markdown('<div class="pm-logo">🎨 Palette Master</div>', unsafe_allow_html=True)
+    st.sidebar.markdown('<div class="pm-logo">🐹 Pontinhos & Ratinhos</div>', unsafe_allow_html=True)
     st.sidebar.caption("CATÁLOGOS (DLCs)")
     
     if load_errors:

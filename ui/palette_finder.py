@@ -1,3 +1,4 @@
+# ui/palette_finder.py
 import streamlit as st
 import colorsys
 from ui.groups import get_groups, save_groups

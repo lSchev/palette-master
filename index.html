@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontinhos & Bigodinhos</title>
+    <link rel="icon" type="image/webp" href="assets/mascotes/mascote-avatar.webp">
+
+    <!-- Fontes da identidade (mockup): Quicksand títulos + Nunito texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        title: ['Quicksand', 'sans-serif']
+                    },
+                    colors: {
+                        pm: {
+                            text: 'var(--text-main)',
+                            bg: 'var(--bg-main)',
+                            card: 'var(--bg-card)',
+                            border: 'var(--border-color)',
+                            accent: 'var(--accent)',
+                            accentHover: 'var(--accent-hover)',
+                            muted: 'var(--text-muted)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Ícones Lucide (dados; o app desenha via React, sem createIcons) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="transition-colors duration-300 antialiased min-h-screen pb-24">
+    <div id="root"></div>
+    <script src="data.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

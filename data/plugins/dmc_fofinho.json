@@ -1,0 +1,218 @@
+{
+  "niche_id": "dmc_fofinho",
+  "niche_name": "DMC Fofinho - Kawaii (35 cores)",
+  "version": "1.0",
+  "icon": "🐹",
+  "colors": [
+    {
+      "code": "Blanc",
+      "name": "Neve de hamster",
+      "rgb": [255, 249, 245],
+      "hex": "#FFF9F5"
+    },
+    {
+      "code": "Ecru",
+      "name": "Biscoitinho",
+      "rgb": [245, 230, 202],
+      "hex": "#F5E6CA"
+    },
+    {
+      "code": "152",
+      "name": "Concha rosada",
+      "rgb": [232, 196, 196],
+      "hex": "#E8C4C4"
+    },
+    {
+      "code": "153",
+      "name": "Rosa algodão",
+      "rgb": [233, 176, 200],
+      "hex": "#E9B0C8"
+    },
+    {
+      "code": "154",
+      "name": "Framboesa fofa",
+      "rgb": [217, 140, 174],
+      "hex": "#D98CAE"
+    },
+    {
+      "code": "223",
+      "name": "Pêssego ninho",
+      "rgb": [232, 175, 160],
+      "hex": "#E8AFA0"
+    },
+    {
+      "code": "224",
+      "name": "Pêssego clarinho",
+      "rgb": [242, 197, 181],
+      "hex": "#F2C5B5"
+    },
+    {
+      "code": "225",
+      "name": "Pêssego ultra",
+      "rgb": [249, 213, 196],
+      "hex": "#F9D5C4"
+    },
+    {
+      "code": "948",
+      "name": "Salmão soneca",
+      "rgb": [247, 198, 176],
+      "hex": "#F7C6B0"
+    },
+    {
+      "code": "760",
+      "name": "Salmão bebê",
+      "rgb": [233, 168, 154],
+      "hex": "#E9A89A"
+    },
+    {
+      "code": "819",
+      "name": "Rosa antigo",
+      "rgb": [232, 196, 192],
+      "hex": "#E8C4C0"
+    },
+    {
+      "code": "3713",
+      "name": "Rosinha chiclete",
+      "rgb": [255, 181, 194],
+      "hex": "#FFB5C2"
+    },
+    {
+      "code": "3712",
+      "name": "Rosa profundo",
+      "rgb": [232, 160, 191],
+      "hex": "#E8A0BF"
+    },
+    {
+      "code": "3609",
+      "name": "Pink frufru",
+      "rgb": [233, 168, 197],
+      "hex": "#E9A8C5"
+    },
+    {
+      "code": "554",
+      "name": "Lavanda fofa",
+      "rgb": [201, 182, 228],
+      "hex": "#C9B6E4"
+    },
+    {
+      "code": "553",
+      "name": "Lavanda média",
+      "rgb": [184, 161, 217],
+      "hex": "#B8A1D9"
+    },
+    {
+      "code": "209",
+      "name": "Lilás ninho",
+      "rgb": [216, 205, 230],
+      "hex": "#D8CDE6"
+    },
+    {
+      "code": "210",
+      "name": "Lilás clarinho",
+      "rgb": [226, 214, 255],
+      "hex": "#E2D6FF"
+    },
+    {
+      "code": "211",
+      "name": "Lilás bebê",
+      "rgb": [237, 227, 255],
+      "hex": "#EDE3FF"
+    },
+    {
+      "code": "341",
+      "name": "Menta gelo",
+      "rgb": [199, 233, 240],
+      "hex": "#C7E9F0"
+    },
+    {
+      "code": "3811",
+      "name": "Azul céu ratinho",
+      "rgb": [181, 216, 224],
+      "hex": "#B5D8E0"
+    },
+    {
+      "code": "775",
+      "name": "Azul bebê",
+      "rgb": [168, 205, 224],
+      "hex": "#A8CDE0"
+    },
+    {
+      "code": "747",
+      "name": "Azul marzinho",
+      "rgb": [198, 223, 240],
+      "hex": "#C6DFF0"
+    },
+    {
+      "code": "598",
+      "name": "Verde menta",
+      "rgb": [181, 234, 215],
+      "hex": "#B5EAD7"
+    },
+    {
+      "code": "564",
+      "name": "Verde jardim",
+      "rgb": [168, 213, 186],
+      "hex": "#A8D5BA"
+    },
+    {
+      "code": "369",
+      "name": "Verdinho ninho",
+      "rgb": [199, 233, 176],
+      "hex": "#C7E9B0"
+    },
+    {
+      "code": "320",
+      "name": "Verde pistache",
+      "rgb": [181, 228, 140],
+      "hex": "#B5E48C"
+    },
+    {
+      "code": "472",
+      "name": "Verde limão fofo",
+      "rgb": [217, 237, 146],
+      "hex": "#D9ED92"
+    },
+    {
+      "code": "3078",
+      "name": "Amarelo gema",
+      "rgb": [255, 242, 168],
+      "hex": "#FFF2A8"
+    },
+    {
+      "code": "743",
+      "name": "Amarelo solzinho",
+      "rgb": [255, 235, 153],
+      "hex": "#FFEB99"
+    },
+    {
+      "code": "744",
+      "name": "Amarelo baunilha",
+      "rgb": [255, 245, 194],
+      "hex": "#FFF5C2"
+    },
+    {
+      "code": "951",
+      "name": "Areia quentinha",
+      "rgb": [232, 220, 200],
+      "hex": "#E8DCC8"
+    },
+    {
+      "code": "950",
+      "name": "Bege ninho",
+      "rgb": [214, 204, 194],
+      "hex": "#D6CCC2"
+    },
+    {
+      "code": "3033",
+      "name": "Taupe fofuxo",
+      "rgb": [201, 173, 167],
+      "hex": "#C9ADA7"
+    },
+    {
+      "code": "535",
+      "name": "Cinza ratinho",
+      "rgb": [154, 140, 152],
+      "hex": "#9A8C98"
+    }
+  ]
+}

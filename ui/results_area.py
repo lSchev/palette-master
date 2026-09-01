@@ -1,3 +1,4 @@
+# ui/results_area.py
 import streamlit as st
 
 def render_results(results: list[dict]) -> None:
