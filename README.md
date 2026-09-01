@@ -1,15 +1,27 @@
-# 🎨 Palette Master
+# 🐾 Pontinhos & Bigodinhos
 
-App web que extrai paleta de cores de imagens (seleção de área com 1 clique) e sugere correspondências em catálogos JSON por nicho (bordado, tintas etc.) com nível de confiança.
+Ateliê de cores para bordado: extraia a paleta de uma imagem, case com linhas DMC reais, salve em ninhos e exporte listas e moodboards.
 
-## Features
-- Plugins modulares (DLCs) em `data/plugins/`
-- 3 temas visuais com detecção do navegador e memória por localStorage
-- Seleção de área com 1 clique (tamanhos P/M/G)
-- Matching RGB por distância euclidiana com % de confiança
-- Buscador de paletas por tom (catálogo ativo)
-- Grupos salvos com persistência no navegador
+🔗 **No ar:** https://lschev.github.io/pontinhos-bigodinhos/
+
+## Features (v2.5)
+
+- 4 abas: Extrator, Ateliê, Ninhos e Catálogo
+- Temas pastel/dark com wallpapers, faixas de cabeçalho e mascotes próprios
+- Extrator K-means + conta-gotas com lupa e seleção de área
+- 489 linhas DMC reais + 35 cores Fofinho
+- Harmonias: pastel, análoga, tríade e monocromática
+- Bancada de trabalho: lista de compras DMC, simulador de pontos e moodboard
+- Ninhos com paletas e projetos salvos no navegador (localStorage)
 
 ## Como rodar localmente
-pip install -r requirements.txt
-streamlit run app.py
+
+Rode `python -m http.server 5500` na pasta do projeto e abra http://localhost:5500
+
+## Estrutura
+
+- `index.html` | `style.css` | `data.js` | `app.js` — app 100% no navegador, sem backend
+- `assets/` — wallpapers, faixas de cabeçalho e mascotes
+- `core/`, `ui/`, `app.py` — legado Streamlit, mantido só como referência
+
+Feito com 💜 para quem borda bonito.
